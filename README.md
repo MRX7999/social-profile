@@ -26,6 +26,7 @@ Social Profiler — это веб-приложение, разработанно
 <iframe width="560" height="315" src="(https://youtu.be/_bkLrgDHFXo)" frameborder="0" allowfullscreen></iframe>
 
 
+
 ## Установка из исодников
 
 1. Установите Go, если он еще не установлен. Инструкции можно найти на официальном сайте Go.
