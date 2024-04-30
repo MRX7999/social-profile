@@ -33,30 +33,41 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
 
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+
     - name: Upload Linux Release Asset
-      id: upload-linux
       uses: actions/upload-release-asset@v1
       with:
-        upload_url: ${{ github.event.release.upload_url }}
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./social-profile-linux-amd64
         asset_name: social-profile-linux-amd64
         asset_content_type: application/octet-stream
 
     - name: Upload Windows Release Asset
-      id: upload-windows
       uses: actions/upload-release-asset@v1
       with:
-        upload_url: ${{ github.event.release.upload_url }}
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./social-profile-windows-amd64.exe
         asset_name: social-profile-windows-amd64.exe
         asset_content_type: application/octet-stream
 
     - name: Upload MacOS Release Asset
-      id: upload-macos
       uses: actions/upload-release-asset@v1
       with:
-        upload_url: ${{ github.event.release.upload_url }}
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./social-profile-darwin-amd64
+        asset_name: social-profile-darwin-amd64
+        asset_content_type: application/octet-stream
+
         asset_name: social-profile-darwin-amd64
         asset_content_type: application/octet-stream
 
