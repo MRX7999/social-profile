@@ -23,7 +23,8 @@ Social Profiler — это веб-приложение, разработанно
 2. Запустите через консоль
 3. Перейдите на `http://localhost:8080` в вашем браузере 
 
-![Демонстрация работы](https://drive.google.com/file/d/1ngguKEobvsty5ZWOtG5WqdyJ9DP5sSNV/view?usp=sharing)
+<iframe width="560" height="315" src="(https://youtu.be/_bkLrgDHFXo)" frameborder="0" allowfullscreen></iframe>
+
 
 ## Установка из исодников
 
