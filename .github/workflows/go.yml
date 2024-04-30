@@ -65,26 +65,23 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset: social-profile-linux-amd64
-          name: social-profile-linux-amd64
-          content_type: application/octet-stream
+          asset_path: social-profile-linux-amd64
+          asset_name: social-profile-linux-amd64
+          asset_content_type: application/octet-stream
 
       - name: Upload Windows Release Asset
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset: social-profile-windows-amd64.exe
-          name: social-profile-windows-amd64.exe
-          content_type: application/octet-stream
+          asset_path: social-profile-windows-amd64.exe
+          asset_name: social-profile-windows-amd64.exe
+          asset_content_type: application/octet-stream
 
       - name: Upload MacOS Release Asset
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset: social-profile-darwin-amd64
-          name: social-profile-darwin-amd64
-          content_type: application/octet-stream
+          asset_path: social-profile-darwin-amd64
+          asset_name: social-profile-darwin-amd64
+          asset_content_type: application/octet-stream
 
-        asset_path: social-profile-darwin-amd64
-        asset_name: social-profile-darwin-amd64
-        asset_content_type: application/octet-stream
