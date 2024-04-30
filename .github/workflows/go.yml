@@ -19,30 +19,77 @@ jobs:
         with:
           go-version: '1.21'
 
-      - name: Build for Linux, Windows, and MacOS
+      - name: Build and Upload for Linux
         run: |
           GOOS=linux GOARCH=amd64 go build -o social-profile-linux-amd64 main.go
-          GOOS=windows GOARCH=amd64 go build -o social-profile-windows-amd64.exe main.go
-          GOOS=darwin GOARCH=amd64 go build -o social-profile-darwin-amd64 main.go
-
-      - name: Set up Git
-        run: git config --global user.email "action@github.com" && git config --global user.name "GitHub Action"
+          echo "Uploading Linux Release Asset"
+          # Вставьте здесь код для загрузки версии в релиз
 
       - name: Create Release
-        id: create_release
+        id: create_release_linux
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
           tag_name: v1.0.0
-          release_name: Release v1.0.0
+          release_name: Release v1.0.0 (Linux)
           draft: false
           prerelease: false
 
-      - name: Upload Release Assets
+      - name: Upload Linux Release Asset
         uses: actions/upload-release-asset@v1
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: social-profile-linux-amd64 social-profile-windows-amd64.exe social-profile-darwin-amd64
-          asset_name: social-profile-linux-amd64 social-profile-windows-amd64.exe social-profile-darwin-amd64
-          asset_content_type: application/octet-stream application/octet-stream application/octet-stream
+          upload_url: ${{ steps.create_release_linux.outputs.upload_url }}
+          asset_path: social-profile-linux-amd64
+          asset_name: social-profile-linux-amd64
+          asset_content_type: application/octet-stream
+
+      - name: Build and Upload for Windows
+        run: |
+          GOOS=windows GOARCH=amd64 go build -o social-profile-windows-amd64.exe main.go
+          echo "Uploading Windows Release Asset"
+          # Вставьте здесь код для загрузки версии в релиз
+
+      - name: Create Release
+        id: create_release_windows
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          tag_name: v1.0.0
+          release_name: Release v1.0.0 (Windows)
+          draft: false
+          prerelease: false
+
+      - name: Upload Windows Release Asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release_windows.outputs.upload_url }}
+          asset_path: social-profile-windows-amd64.exe
+          asset_name: social-profile-windows-amd64.exe
+          asset_content_type: application/octet-stream
+
+      - name: Build and Upload for MacOS
+        run: |
+          GOOS=darwin GOARCH=amd64 go build -o social-profile-darwin-amd64 main.go
+          echo "Uploading MacOS Release Asset"
+          # Вставьте здесь код для загрузки версии в релиз
+
+      - name: Create Release
+        id: create_release_macos
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          tag_name: v1.0.0
+          release_name: Release v1.0.0 (MacOS)
+          draft: false
+          prerelease: false
+
+      - name: Upload MacOS Release Asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release_macos.outputs.upload_url }}
+          asset_path: social-profile-darwin-amd64
+          asset_name: social-profile-darwin-amd64
+          asset_content_type: application/octet-stream
