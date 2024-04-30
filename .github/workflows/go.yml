@@ -33,14 +33,17 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
 
+    - name: Set up Git
+      run: git config --global user.email "action@github.com" && git config --global user.name "GitHub Action"
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: v1.0.0
+        release_name: Release v1.0.0
         draft: false
         prerelease: false
 
